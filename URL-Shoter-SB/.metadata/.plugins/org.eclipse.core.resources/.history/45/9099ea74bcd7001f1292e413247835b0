@@ -1,0 +1,5 @@
+package com.url.shorter.controller;
+
+public class AuthController {
+
+}

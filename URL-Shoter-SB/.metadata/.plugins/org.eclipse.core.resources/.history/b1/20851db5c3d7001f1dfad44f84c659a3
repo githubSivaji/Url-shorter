@@ -1,0 +1,5 @@
+package com.url.shorter.repository;
+
+public class UserRepository {
+
+}

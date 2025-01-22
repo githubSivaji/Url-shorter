@@ -1,0 +1,21 @@
+package com.url.shorter.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.url.shorter.models.UrlMapping;
+import com.url.shorter.service.UrlMappingService;
+
+@RestController 
+public class RedirectController {
+  
+	  UrlMappingService  urlMappingService; 
+	
+	public ResponseEntity<Void> redirect(@PathVariable String shortUrl)
+	{
+		 UrlMapping urlMapping=urlMappingService.getOriginalUrl(shortUrl);
+		 
+		 return null;
+	}
+}

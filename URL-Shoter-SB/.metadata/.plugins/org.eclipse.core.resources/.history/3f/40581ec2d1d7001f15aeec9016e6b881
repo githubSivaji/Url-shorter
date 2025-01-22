@@ -1,0 +1,5 @@
+package com.url.shorter.security.jwt;
+
+public class JwtUtils {
+
+}
