@@ -4,10 +4,13 @@ import TextField from './TextField';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../components/api';
 import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { useStoreContext} from '../contextApi/ContextApi';
 
-const RegisterPage = () => {
+const LoginPage = () => {
     const navigate = useNavigate();
     const [loader, setLoader] = useState(false);
+    const {setToken}=useStoreContext();
 
     const {
         register,
@@ -23,19 +26,22 @@ const RegisterPage = () => {
         mode: "onTouched",
     });
 
-    const registerHandler = async (data) => {
+    const LoginHandler = async (data) => {
         setLoader(true);
         try {
             const { data: response } = await api.post(
-                "/api/auth/public/register",
+                "/api/auth/public/login",
                 data
             );
+            console.log(response.token)
+            setToken((response.token))
+            localStorage.setItem("JWT_TOKEN",JSON.stringify(response.token))
             reset();
-            navigate("/login");
-            toast.success("Registeration Successful!")
+            navigate("/dashboard");
+            toast.success("Login Sucessful")
         } catch (error) {
             console.log(error);
-            toast.error("Registeration Failed!")
+            toast.error("Login Failed!")
         } finally {
             setLoader(false);
         }
@@ -44,10 +50,10 @@ const RegisterPage = () => {
   return (
     <div
         className='min-h-[calc(100vh-64px)] flex justify-center items-center'>
-        <form onSubmit={handleSubmit(registerHandler)}
+        <form onSubmit={handleSubmit(LoginHandler)}
             className="sm:w-[450px] w-[360px]  shadow-custom py-8 sm:px-8 px-4 rounded-md">
             <h1 className="text-center font-serif text-btnColor font-bold lg:text-3xl text-2xl">
-                Register Here
+               Login Here
             </h1>
 
             <hr className='mt-2 mb-5 text-black'/>
@@ -63,18 +69,6 @@ const RegisterPage = () => {
                     register={register}
                     errors={errors}
                 />
-
-                <TextField
-                    label="Email"
-                    required
-                    id="email"
-                    type="email"
-                    message="*Email is required"
-                    placeholder="Type your email"
-                    register={register}
-                    errors={errors}
-                />
-
                 <TextField
                     label="Password"
                     required
@@ -92,20 +86,20 @@ const RegisterPage = () => {
                 disabled={loader}
                 type='submit'
                 className='bg-customRed font-semibold text-white  bg-custom-gradient w-full py-2 hover:text-slate-400 transition-colors duration-100 rounded-sm my-3'>
-                {loader ? "Loading..." : "Register"}
+                {loader ? "Loading..." : "Login"}
             </button>
 
-            <p className='text-center text-sm text-slate-700 mt-6'>
-                Already have an account? 
+            {<p className='text-center text-sm text-slate-700 mt-6'>
+                Don't have an account? 
                 <Link
                     className='font-semibold underline hover:text-black'
-                    to="/login">
-                        <span className='text-btnColor'> Login</span>
+                    to="/register">
+                        <span className='text-btnColor'> signUp</span>
                 </Link>
-            </p>
+            </p> }
         </form>
     </div>
   )
 }
 
-export default RegisterPage
+export default LoginPage
