@@ -8,6 +8,7 @@ import RegisterPage from "./components/RegisterPage"
 import LoginPage from "./components/LoginPage"
 import { Toaster } from "react-hot-toast"
 import DashboardLayout from "./components/Dashboard/DashboardLayout"
+import ErrorPage from "./components/ErrorPage"
 export default function App() {
   return (
       <BrowserRouter>
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/dashboard" element={<DashboardLayout/>}/>
+        <Route path="/error" element={ <ErrorPage/>} />
       </Routes>
       <Footer/>
       </BrowserRouter>
