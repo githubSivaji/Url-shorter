@@ -10,6 +10,7 @@ import { Routes,BrowserRouter as Router,Route } from "react-router-dom"
 import { Toaster } from "react-hot-toast"
 import ErrorPage from "./components/ErrorPage"
 import Footer from "./components/Footer"
+import PrivateRoute from "./PrivateRoute"
 export const AppRouter=()=>{
 
     return (
@@ -19,10 +20,12 @@ export const AppRouter=()=>{
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/about" element={<AboutPage/>}/>
-          <Route path="/register" element={<RegisterPage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/dashboard" element={<DashboardLayout/>}/>
+          <Route path="/register" element={<PrivateRoute publicPage={true}><RegisterPage/></PrivateRoute>}/>
+          <Route path="/login" element={<PrivateRoute publicPage={true}><LoginPage/></PrivateRoute>}/>
+          <Route path="/dashboard" element={ <PrivateRoute publicPage={false}><DashboardLayout/></PrivateRoute>}/>
           <Route path="/error" element={ <ErrorPage/>} />
+          <Route path="*" element={ <ErrorPage message="We can't seem to find the page you're looking for"/>} />
+
         </Routes>
         <Footer/>
         </>
