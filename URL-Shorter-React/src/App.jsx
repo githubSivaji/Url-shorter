@@ -12,6 +12,9 @@ import { Toaster } from "react-hot-toast"
 import ErrorPage from "./components/ErrorPage"
 import Footer from "./components/Footer"
 import PrivateRoute from "./PrivateRoute"
+import Forgot from "./components/Forgot"
+import ResetPassword from "./components/ResetPassword"
+
 export default function App() {
   // const CurrentApp = getApps();
   const hideHeaderFooter = location.pathname.startsWith("/s");
@@ -25,10 +28,13 @@ export default function App() {
           <Route path="/about" element={<AboutPage/>}/>
           <Route path="/register" element={<PrivateRoute publicPage={true}><RegisterPage/></PrivateRoute>}/>
           <Route path="/login" element={<PrivateRoute publicPage={true}><LoginPage/></PrivateRoute>}/>
+          <Route path="/forgot-password"  element={<PrivateRoute publicPage={true}><Forgot/></PrivateRoute>} />
+
           <Route path="/s/:url" element={<ShortenUrlPage />} />
           <Route path="/dashboard" element={ <PrivateRoute publicPage={false}><DashboardLayout/></PrivateRoute>}/>
           <Route path="/error" element={ <ErrorPage/>} />
           <Route path="*" element={ <ErrorPage message="We can't seem to find the page you're looking for"/>} />
+          <Route path="/reset-password/key/:token" element={<ResetPassword />} />
 
         </Routes>
         {!hideHeaderFooter && <Footer />}

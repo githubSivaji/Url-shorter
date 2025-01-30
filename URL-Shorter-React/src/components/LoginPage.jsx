@@ -88,7 +88,11 @@ const LoginPage = () => {
                 className='bg-customRed font-semibold text-white  bg-custom-gradient w-full py-2 hover:text-slate-400 transition-colors duration-100 rounded-sm my-3'>
                 {loader ? "Loading..." : "Login"}
             </button>
-
+             {<p className='text-left text-sm text-red-500'>   <Link
+                    className='font-semibold underline hover:text-black'
+                    to="/forgot-password">
+                        <span> Forgot Password</span>
+                </Link></p>}
             {<p className='text-center text-sm text-slate-700 mt-6'>
                 Don't have an account? 
                 <Link
