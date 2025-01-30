@@ -1,0 +1,5 @@
+package com.url.shorter.exception;
+
+public class AccountNotFoundException {
+
+}

@@ -1,0 +1,17 @@
+spring.application.name=Url-shorter
+spring.datasource.url={DATABASE_URL}
+spring.datasource.username=root
+spring.datasource.password=Sivaji@07
+
+ #JPA (Hibernate) properties
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+jwt.secret=gbfgngnfhnmnmfhnhnfefgbtrbhryjutymyewfghyjuyjkyikiul
+jwt.expiration=172800000
+frontend.url=http://localhost:5173
+
+
+logging.level.org.springframework.security=DEBUG
+logging.level.org.url.shortener=DEBUG

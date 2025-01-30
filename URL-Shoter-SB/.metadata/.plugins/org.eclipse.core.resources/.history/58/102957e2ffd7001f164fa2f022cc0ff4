@@ -1,9 +1,0 @@
-package com.url.shorter.dtos;
-
-import java.time.LocalDate;
-
-public class ClickEventDTO {
- 
-	private LocalDate createDate;
-	private int count;
-}

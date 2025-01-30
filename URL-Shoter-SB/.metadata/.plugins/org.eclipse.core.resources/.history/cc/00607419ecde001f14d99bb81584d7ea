@@ -1,0 +1,36 @@
+package com.url.shorter.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+import com.url.shorter.dtos.EmailDTO;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+
+@Service
+public class EmailService {
+	
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
+	@Value("${spring.mail.username}")
+	private String sendmail;
+	
+	public void sendMessage(EmailDTO emailDTO) throws MessagingException
+	{
+		MimeMessage message=javaMailSender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+		helper.setTo(emailDTO.getEmail()); // Receiver's email
+		helper.setSubject("Hello from Spring Boot!"); // Email subject
+		helper.setText("This is a simple text email.", false); // Email body (false = plain text)
+		helper.setFrom(sendmail);
+	}
+
+}

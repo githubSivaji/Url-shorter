@@ -1,0 +1,4 @@
+#Thu Jan 30 12:42:51 IST 2025
+__DEFAULT__=true
+org.eclipse.help.ui.localSearch.master=true
+org.hibernate.eclipse.help.HibernateWiki.master=true

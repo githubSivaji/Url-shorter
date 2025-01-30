@@ -1,5 +1,0 @@
-package com.url.shorter.dtos;
-
-public class LoginRequest {
-
-}
