@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import api from '../components/api';
 import toast from 'react-hot-toast';
-import PasswordResetInput from "./PasswordResetInput"
+import PasswordResetInput from "./PasswordResetInput";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
+  const { token } = useParams(); // Destructure the token from useParams
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     mode: "onTouched",
   });
@@ -15,14 +16,16 @@ const ResetPassword = () => {
   const forgotHandler = async (data) => {
     setLoader(true);
     try {
-      const response = await api.post("/accounts/forgot", data);
+      const response = await api.post("/accounts/reset-password", { password: data.password, reset_token: token }); // Send token and password in body
       console.log(response);
-      toast.success("Check your Gmail inbox for the reset link!");
+      toast.success("Reset-Password Successful");
       setLoader(false);
-      reset(); // Optionally reset form fields after successful submission
+      reset();
+      navigate("/login");
+       // Optionally reset form fields after successful submission
     } catch (error) {
-      console.error(error?.response?.data || error.message || "Login Failed!");
-      toast.error("Failed email Not match!");
+      console.error(error?.response?.data || error.message || "Reset failed!");
+      toast.error(error?.response?.data || error.message );
     } finally {
       setLoader(false);
     }
